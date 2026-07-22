@@ -1,0 +1,6 @@
+{
+    "name": "DetectiveRoom.Runtime",
+    "references": [
+        "UnityEngine.UI"
+    ]
+}

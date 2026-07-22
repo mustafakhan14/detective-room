@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "com.gladekit.mcp-bridge": "https://github.com/Glade-tool/glade-mcp.git?path=/unity-bridge#57f7e1930726079e3c44475877a514758ea2545f",
+    "com.unity.test-framework": "1.7.0",
+    "com.unity.ugui": "1.0.0",
+    "com.unity.modules.ai": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0"
+  }
+}
