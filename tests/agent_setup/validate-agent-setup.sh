@@ -26,6 +26,7 @@ require_contains() {
 required_files=(
   AGENTS.md
   GLADE.md
+  LICENSE
   THIRD_PARTY_NOTICES.md
   .mcp.example.json
   docs/prior-art.md
@@ -130,6 +131,8 @@ require_contains THIRD_PARTY_NOTICES.md "CoplayDev MCP for Unity"
 require_contains THIRD_PARTY_NOTICES.md "CoderGamester MCP Unity"
 require_contains THIRD_PARTY_NOTICES.md "akiojin unity-cli"
 require_contains THIRD_PARTY_NOTICES.md "IvanMurzak Unity-MCP"
+require_contains LICENSE "MIT License"
+require_contains README.md "THIRD_PARTY_NOTICES\.md"
 require_contains docs/prior-art-audit.md "Apache-2.0"
 require_contains docs/saad-codex-repo-setup-prompt.md "I have no coding or"
 require_contains docs/saad-codex-repo-setup-prompt.md "Do not stop at"
