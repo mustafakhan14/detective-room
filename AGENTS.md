@@ -64,6 +64,8 @@ This is a Unity 6000.5.4f1 project for a one-room 2.5D detective prototype.
 
 - Default to GladeKit MCP for this project.
 - Use `docs/bridge-selection.md` before changing bridge strategy.
+- Treat official Unity MCP as an opt-in secondary bridge; read `docs/unity-mcp-bakeoff.md` before installing or enabling it.
+- Never call official `Unity_AssetGeneration_*` tools without separate explicit approval for the exact generation, terms, and possible cost.
 - Keep `.mcp.example.json` as an example only; do not commit personal MCP client config or secrets.
 - Run `scripts/mcp-smoke-check.sh --static` for config readiness and `scripts/mcp-smoke-check.sh` for live bridge readiness.
 

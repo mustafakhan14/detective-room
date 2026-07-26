@@ -13,6 +13,10 @@ Why:
 - It keeps the bridge as a package dependency instead of vendoring a bridge implementation into this learning repo.
 - It can run fully local for core features.
 
+The controlled 2026-07-25 bakeoff is recorded in
+`docs/unity-mcp-bakeoff.md`. The official bridge did not win the overall
+repo-default decision.
+
 Install path:
 
 ```text
@@ -30,6 +34,7 @@ uvx gladekit-mcp
 | Option | Use when | Avoid when |
 | --- | --- | --- |
 | `Glade-tool/glade-mcp` | Default Unity MCP bridge, `GLADE.md` context, script search, broad tools | You need built-in screenshot capture, want to avoid installing `uv`, or the package URL fails |
+| Official Unity MCP in `com.unity.ai.assistant` | You need native camera/multi-angle capture, exact project/PID targeting, signed per-client approval, Play Mode control, or project-local typed custom MCP tools | You do not want a large pre-release AI package, account/disclaimer friction, entitlement warnings, or a default surface dominated by `Unity_RunCommand` |
 | `CoplayDev/unity-mcp` | You need mature Unity MCP operator docs, resource-first workflows, broad test/harness ideas | You do not want a Python/FastMCP bridge |
 | `CoderGamester/mcp-unity` | You want a compact Node/WebSocket bridge model and simple tool/resource contracts | You need the broader GladeKit tool surface |
 | `akiojin/unity-cli` | MCP is unavailable but a typed CLI workflow, dry-run calls, or command schemas would help | You need MCP-native integration |
@@ -47,6 +52,9 @@ uvx gladekit-mcp
 ## Current Status
 
 - Default bridge: GladeKit MCP.
+- Optional secondary bridge: official Unity MCP; install only for a specific
+  capability gap and validate with `scripts/official-unity-mcp-smoke.mjs`.
+- Bakeoff result: `docs/unity-mcp-bakeoff.md`.
 - Example MCP config: `.mcp.example.json`.
 - Local smoke readiness script: `scripts/mcp-smoke-check.sh`.
 - Full Unity verification script: `scripts/verify-unity.sh`.

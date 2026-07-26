@@ -32,11 +32,16 @@ require_file ".mcp.example.json"
 require_file "docs/mcp-operating-loop.md"
 require_file "docs/unity-agent-bridge.md"
 require_file "docs/mcp-smoke.md"
+require_file "docs/unity-mcp-bakeoff.md"
+require_file "scripts/official-unity-mcp-smoke.mjs"
 
 node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$PROJECT_ROOT/.mcp.example.json"
+node --check "$PROJECT_ROOT/scripts/official-unity-mcp-smoke.mjs"
 require_contains ".mcp.example.json" '"command"[[:space:]]*:[[:space:]]*"uvx"'
 require_contains ".mcp.example.json" '"gladekit-mcp"'
 require_contains "GLADE.md" "__DetectiveRoomGenerated"
+require_contains "docs/unity-mcp-bakeoff.md" "Keep GladeKit MCP as the default bridge"
+require_contains "scripts/official-unity-mcp-smoke.mjs" 'startsWith\("Unity_AssetGeneration_"\)'
 
 if [[ "$STATIC_ONLY" -eq 1 ]]; then
   echo "MCP static smoke prerequisites passed."

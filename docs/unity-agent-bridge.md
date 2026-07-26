@@ -80,3 +80,32 @@ required automated smoke checks.
 Use `docs/mcp-operating-loop.md` for the resource-first workflow adapted from the audited Unity MCP projects.
 
 When using GladeKit asset import tools, do not set `licenseAcknowledged: true` until the user explicitly approves the exact asset and license candidate.
+
+## Optional Official Unity MCP
+
+The official Unity MCP bridge is an opt-in secondary bridge, not the default.
+Read `docs/unity-mcp-bakeoff.md` for the tested version, evidence matrix,
+setup, safety boundary, and rollback steps.
+
+Use it when a task specifically needs:
+
+- native camera or multi-angle scene capture;
+- exact project-path or Editor-PID targeting;
+- signed and remembered per-client connection approval;
+- Play Mode entry/exit through MCP;
+- project-local typed custom tools registered with `[McpTool]`.
+
+Do not install it only for ordinary hierarchy, component, console, or asset
+operations already covered by GladeKit. The tested pre-release package added
+about 593 MB to `Library/PackageCache`, exposed only 7 of 54 tools by default,
+and repeatedly logged missing-entitlement and Account API warnings even though
+direct MCP calls succeeded.
+
+The opt-in smoke test is:
+
+```bash
+node scripts/official-unity-mcp-smoke.mjs
+```
+
+The harness refuses `Unity_AssetGeneration_*` calls and writes evidence under
+ignored `Logs/`.

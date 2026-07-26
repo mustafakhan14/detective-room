@@ -57,3 +57,17 @@ failure.
 - No new console errors are reported.
 - Visual tasks have either an automated capture or a documented manual Editor screenshot.
 - The agent does not mutate the scene during smoke testing.
+
+## Optional Official Bridge Smoke
+
+When `com.unity.ai.assistant` and the official relay are deliberately installed,
+run:
+
+```bash
+node scripts/official-unity-mcp-smoke.mjs
+```
+
+This is not part of the default GladeKit setup. It validates exact target-scene
+inspection, console access, 20 read samples, native captures, Undo, Play Mode,
+and domain-reload recovery. It refuses official asset-generation tools. See
+`docs/unity-mcp-bakeoff.md` for prerequisites and the tested decision.
