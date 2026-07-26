@@ -47,6 +47,7 @@ required_files=(
   docs/sprint-status.yaml
   docs/stories/000-template.md
   docs/stories/001-agentic-unity-baseline.md
+  docs/stories/002-harness-alignment.md
   docs/unity-agent-bridge.md
   docs/unity-editor-mutation-policy.md
   docs/unity-mcp-bakeoff.md
@@ -57,7 +58,9 @@ required_files=(
   scripts/official-unity-mcp-smoke.mjs
   scripts/unity-model-reviewer.sh
   scripts/lib/bridge-policy.mjs
+  scripts/lib/unity-test-results.mjs
   tests/agent_setup/bridge-policy.test.mjs
+  tests/agent_setup/verify-unity.test.mjs
   scripts/verify-unity.sh
 )
 
@@ -75,7 +78,10 @@ require_executable scripts/bridge-status.mjs
 node --check scripts/official-unity-mcp-smoke.mjs
 node --check scripts/bridge-status.mjs
 node --check scripts/lib/bridge-policy.mjs
-node --test tests/agent_setup/bridge-policy.test.mjs
+node --check scripts/lib/unity-test-results.mjs
+node --test \
+  tests/agent_setup/bridge-policy.test.mjs \
+  tests/agent_setup/verify-unity.test.mjs
 
 for generated_dir in Library Temp Obj Logs Build Builds UserSettings; do
   git check-ignore -q --no-index "${generated_dir}/.agent-setup-probe" || \
@@ -148,10 +154,16 @@ require_contains docs/agent-workflow-80-20.md "Story Size"
 require_contains docs/checklists/story-done.md "Unity-tuned local reviewer"
 require_contains docs/sprint-status.yaml "baseline-ready"
 require_contains docs/local-models.md "parashm/Qwen2\\.5-Coder-7B-Instruct-Unity-Q6_K-GGUF"
-require_contains prompts/unity-finetuned-reviewer.md "Unity 6000\\.5\\.4f1"
+require_contains prompts/unity-finetuned-reviewer.md "6000\\.5\\.4f1"
 require_contains scripts/unity-model-reviewer.sh "UNITY_REVIEW_MODEL"
+require_contains scripts/unity-model-reviewer.sh "UNITY_DEEP_REVIEW_MODEL"
+require_contains scripts/unity-model-reviewer.sh "UNITY_REVIEW_MAX_INPUT_CHARS"
 require_contains scripts/verify-unity.sh "require_test_results"
-require_contains scripts/verify-unity.sh "warnings"
+require_contains scripts/verify-unity.sh "unity-test-results\\.mjs"
+require_contains scripts/verify-unity.sh "UNITY_VERIFY_ARTIFACT_ROOT"
+require_contains scripts/verify-unity.sh "EDITMODE_RESULTS"
+require_contains scripts/lib/unity-test-results.mjs "warnings"
+require_contains scripts/lib/unity-test-results.mjs "categorized"
 require_contains scripts/verify-unity.sh "another Unity instance is running with this project open"
 require_contains scripts/mcp-smoke-check.sh "get_scene_hierarchy"
 require_contains scripts/mcp-smoke-check.sh "get_unity_console_logs"

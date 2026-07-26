@@ -1,5 +1,5 @@
 project: detective-room
-active_story: docs/stories/001-agentic-unity-baseline.md
+active_story: null
 status: baseline-ready
 updated: 2026-07-25
 stories:
@@ -14,3 +14,14 @@ stories:
       mcp_live: passed
       hybrid_policy_tests: passed
       local_model_reviewer: not-applicable-no-unity-code-change
+  - id: 002
+    title: Align Verification And Reviewer Harness
+    path: docs/stories/002-harness-alignment.md
+    status: done
+    verification:
+      unity: passed
+      static_agent_setup: passed
+      mcp_static: passed
+      mcp_live: passed
+      verifier_policy_tests: passed
+      local_model_reviewer: not-applicable-no-unity-code-or-package-change

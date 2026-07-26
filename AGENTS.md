@@ -27,6 +27,9 @@ This is a Unity 6000.5.4f1 project for a one-room 2.5D detective prototype.
 - If Unity reports a licensing IPC failure, open Unity Hub or the Unity Editor once for this project, then rerun the script.
 - For Unity behavior changes, also do a manual Play check in `Assets/Scenes/DetectiveRoom.unity`.
 - For Unity C# or package changes, run the local Unity-tuned reviewer when available: `git diff -- Assets/Scripts Assets/Tests Packages ProjectSettings | scripts/unity-model-reviewer.sh`.
+- For high-risk, cross-cutting, or disputed Unity changes, follow with:
+  `git diff -- Assets Packages ProjectSettings |`
+  `scripts/unity-model-reviewer.sh --deep`.
 - For MCP/editor bridge work, verify hierarchy and console access. Capture a scene or game view screenshot when the bridge advertises a capture tool; otherwise record a manual Editor screenshot for visual changes.
 - Use `docs/mcp-operating-loop.md` when operating Unity through MCP.
 - Use the project-local skill playbooks in `docs/agent-skills/` for scene inspection, C# changes, PlayMode testing, and MCP workflows.
