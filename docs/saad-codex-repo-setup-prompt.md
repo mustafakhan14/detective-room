@@ -2,7 +2,7 @@
 
 This is a copy-paste prompt for setting up a new Unity repo with Codex. Its
 reference implementation is published at
-`https://github.com/mustafakhan14/unitylearning`.
+`https://github.com/mustafakhan14/unity-agentic-starter`.
 
 ```text
 You are my hands-on Unity setup and development agent. I have no coding or
@@ -18,7 +18,7 @@ My project:
 - Unity version: <VERSION_OR_DETECT_INSTALLED_VERSION>
 
 Reference implementation:
-- https://github.com/mustafakhan14/unitylearning
+- https://github.com/mustafakhan14/unity-agentic-starter
 
 Use the reference repo as a proven agentic-Unity baseline. Clone it into a
 temporary sibling or temporary directory for inspection; do not nest its Git

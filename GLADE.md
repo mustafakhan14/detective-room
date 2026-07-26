@@ -21,6 +21,9 @@ The player is a detective investigating one compact room. The room has three ess
 - UI stack: uGUI (`Canvas`, `Text`, `Button`, `CanvasScaler`).
 - Physics stack: built-in 3D physics raycasts and colliders.
 - Runtime assembly: `DetectiveRoom.Runtime`.
+- Bridge routing: `config/unity-bridge-registry.json`.
+- GladeKit is the broad typed-tool baseline.
+- Official Unity MCP is opt-in for native capabilities it wins.
 
 ## Conventions
 
@@ -39,3 +42,4 @@ The player is a detective investigating one compact room. The room has three ess
 - Unity C# and package changes receive a local Unity-tuned reviewer pass when the model is available.
 - The target scene opens and can be played manually.
 - Console logs are checked after Unity or MCP runs.
+- MCP Editor work records the capability route and exactly one mutation owner.

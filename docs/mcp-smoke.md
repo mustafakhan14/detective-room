@@ -7,11 +7,13 @@ Use this after installing the GladeKit bridge and opening the Unity project.
 Run:
 
 ```bash
+scripts/bridge-status.mjs --static --recommend hierarchy_inspection
 scripts/mcp-smoke-check.sh --static
 ```
 
 Expected:
 
+- `config/unity-bridge-registry.json` is valid and the router can recommend a provider.
 - `GLADE.md` exists in the Unity project root.
 - `.mcp.example.json` is valid JSON and uses `uvx gladekit-mcp`.
 - `docs/mcp-operating-loop.md` and `docs/unity-agent-bridge.md` exist.
@@ -35,15 +37,16 @@ Expected:
 
 Ask the MCP-enabled agent to perform these in order:
 
-1. Read bridge/editor health.
-2. Confirm the active project path is the current repository root.
-3. Read `GLADE.md` context.
-4. Read the active scene hierarchy.
-5. Confirm `__DetectiveRoomGenerated`.
-6. Read Unity console errors and warnings.
-7. Inspect the advertised tool list for a scene/game-view capture tool.
-8. Capture through the bridge when available; otherwise record a manual Editor screenshot for visual changes.
-9. Report whether the scene is ready for a PlayMode verification.
+1. Select the capability route and record the mutation owner when applicable.
+2. Read bridge/editor health.
+3. Confirm the active project path is the current repository root.
+4. Read `GLADE.md` context.
+5. Read the active scene hierarchy.
+6. Confirm `__DetectiveRoomGenerated` in the active detective scene.
+7. Read Unity console errors and warnings.
+8. Inspect the advertised tool list for a scene/game-view capture tool.
+9. Capture through the bridge when available; otherwise record a manual Editor screenshot for visual changes.
+10. Report whether the scene is ready for a PlayMode verification.
 
 The pinned GladeKit bridge `0.7.16` currently advertises hierarchy and console
 tools but no screenshot/capture tool through `/api/tools/list`. Screenshot
@@ -53,7 +56,7 @@ failure.
 ## Pass Criteria
 
 - The active project and scene are correct.
-- `__DetectiveRoomGenerated` is present.
+- The expected scene bootstrap and runtime readiness marker are present.
 - No new console errors are reported.
 - Visual tasks have either an automated capture or a documented manual Editor screenshot.
 - The agent does not mutate the scene during smoke testing.

@@ -34,11 +34,18 @@ For gameplay changes, also manually verify:
 5. Use `Radio Dispatcher`.
 6. Confirm objective completion.
 
-## MCP Smoke Test
+## Hybrid MCP Check
 
-After GladeKit MCP is configured, verify:
+Select the route before tool use:
+
+```bash
+scripts/bridge-status.mjs --recommend hierarchy_inspection
+```
+
+After the selected bridge is configured, verify:
 
 - Read scene hierarchy.
 - Confirm `__DetectiveRoomGenerated`.
 - Read console logs.
-- Capture through the bridge when supported, or use a manual Editor screenshot for visual changes.
+- Capture through the selected bridge when supported, or use a manual Editor screenshot for visual changes.
+- For mutations, confirm one bridge owned the complete operation and any second bridge stayed read-only.
