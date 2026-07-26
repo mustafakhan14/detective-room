@@ -1,8 +1,8 @@
 # Local Models
 
-Use a Unity-tuned local model as a standard reviewer for Unity API risk. It is not the implementation authority; Unity compile, tests, MCP/editor state, and local package code remain the source of truth.
+Use local models as layered reviewers for Unity API risk. They are not implementation authorities; Unity compile, tests, MCP/editor state, and local package code remain the source of truth.
 
-## Default 80/20 Reviewer
+## Default 80/20 Specialist
 
 Use `parashm/Qwen2.5-Coder-7B-Instruct-Unity-Q6_K-GGUF:Q6_K` through Ollama or another GGUF runtime.
 
@@ -12,7 +12,7 @@ Recommended pull command:
 ollama pull hf.co/parashm/Qwen2.5-Coder-7B-Instruct-Unity-Q6_K-GGUF:Q6_K
 ```
 
-Recommended smoke command:
+Recommended specialist smoke command:
 
 ```bash
 scripts/unity-model-reviewer.sh --smoke
@@ -24,13 +24,31 @@ Recommended review command after Unity C# or package changes:
 git diff -- Assets/Scripts Assets/Tests Packages ProjectSettings | scripts/unity-model-reviewer.sh
 ```
 
+The 7B Unity-tuned model is the fast first pass. It is useful for API skepticism, but its verdict can understate cross-cutting runtime/editor or architectural failures.
+
+## Deep Reviewer
+
+Use the broader `qwen3.6:latest` model for high-risk changes, ambiguous specialist findings, runtime/editor assembly boundaries, package changes, or before a release checkpoint:
+
+```bash
+git diff -- Assets/Scripts Assets/Tests Packages ProjectSettings | scripts/unity-model-reviewer.sh --deep
+```
+
+Verify that the optional deep model is installed with:
+
+```bash
+scripts/unity-model-reviewer.sh --deep --check
+```
+
+The deep reviewer is slower and not Unity-fine-tuned. It complements the specialist; it does not replace deterministic Unity validation.
+
 If the default model is still downloading, the script can be smoke-tested with another installed Ollama model:
 
 ```bash
 UNITY_REVIEW_MODEL=qwen2.5-coder:14b scripts/unity-model-reviewer.sh --smoke
 ```
 
-That fallback validates the workflow path only. It is not a substitute for the Unity-tuned reviewer.
+That fallback validates the workflow path only. It is not a substitute for the layered review policy.
 
 ## Role In This Repo
 
@@ -65,6 +83,14 @@ Do not start a repo-specific fine-tune until this project has:
 - a repeatable evaluator script that compares reviewer output against expected findings
 
 Until then, the high-leverage path is a Unity-tuned reviewer plus deterministic verification.
+
+## Current 80/20 Model Policy
+
+1. Codex remains the main planner and implementation agent.
+2. Run the Unity-tuned 7B reviewer after Unity C# or package changes.
+3. Add `--deep` for risky, cross-cutting, or disputed changes.
+4. Treat both model outputs as advisory and resolve them with compile, EditMode, PlayMode, console, MCP state, and screenshots where relevant.
+5. Do not download a larger Unity model until a repo-specific evaluation set shows a likely gain.
 
 ## Source Notes
 
